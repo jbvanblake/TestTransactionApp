@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.example.TransactionProcessorApp.TransactionType.DEPOSIT;
 import static org.example.TransactionProcessorApp.TransactionType.WITHDRAW;
@@ -19,8 +18,8 @@ public class TransactionProcessorApp {
 
     public void processTransactions(String[] transactions) {
 
-//        System.out.println("Starting Transaction Processor:");
-//        System.out.println("Start Inputs:");
+        log("Starting Transaction Processor:");
+        log("Start Inputs:");
         for (String transaction : transactions) {
             TransactionType transactionType = extractTransactionType(transaction);
             String accountNumber = extractAccountNumber(transaction);
@@ -34,15 +33,19 @@ public class TransactionProcessorApp {
                 withdraw(accountNumber, transactionAmount);
             }
 
-//            System.out.println(transaction);
+            log(transaction);
 
         }
-//        System.out.println("End Inputs:");
+        log("End Inputs:");
 
         accounts.entrySet().stream()
                 .forEach(entry -> System.out.println(entry.getKey() + " - $" + entry.getValue().getAmount()));
         ;
 // TODO: Implement
+    }
+
+    private static void log(String message) {
+        System.out.println(message);
     }
 
     private void withdraw(String accountNumber, Integer transactionAmount) {
