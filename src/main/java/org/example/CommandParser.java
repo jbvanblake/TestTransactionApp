@@ -1,9 +1,10 @@
 package org.example;
 
 public abstract class CommandParser {
+    public static final int TRANSACTION_TYPE_STRING_LENGTH = 4;
+    public static final int ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH = 2;
     protected final AccountDao accountDao;
     protected TransactionType type;
-
 
     public CommandParser(AccountDao accountDao, TransactionType type) {
         this.accountDao = accountDao;

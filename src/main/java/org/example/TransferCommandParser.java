@@ -1,8 +1,5 @@
 package org.example;
 
-import static org.example.TransactionProcessorApp.ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH;
-import static org.example.TransactionProcessorApp.TRANSACTION_TYPE_STRING_LENGTH;
-
 public class TransferCommandParser extends CommandParser {
     public TransferCommandParser(AccountDao accountDao) {
         super(accountDao, TransactionType.TRANSFER);

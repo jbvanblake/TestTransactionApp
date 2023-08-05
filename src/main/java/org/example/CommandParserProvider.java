@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static org.example.TransactionType.valueOfPrefix;
 
 public class CommandParserProvider {
     List<CommandParser> parsers;
@@ -13,6 +16,14 @@ public class CommandParserProvider {
         parsers.add(new TransferCommandParser(accountDao));
     }
 
-    public CommandParser getParser(TransactionType t) {
-        return parsers.stream().filter(commandParser -> commandParser.type == t).findFirst().get();}
+    public CommandParser getParserFromTransactionString(String transactionString) {
+        TransactionType transactionType = extractTransactionType(transactionString);
+
+        return parsers.stream().filter(commandParser -> commandParser.type == transactionType).findFirst().get();}
+
+    public TransactionType extractTransactionType(String transaction) {
+        String transactionTypePrefix = transaction.substring(0, 4);
+        Optional<TransactionType> transactionType = valueOfPrefix(transactionTypePrefix);
+        return transactionType.get();
+    }
 }
