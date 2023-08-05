@@ -1,7 +1,6 @@
 package org.example;
 
 
-import org.example.TransactionProcessorApp.TransactionType;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import static org.example.TransactionProcessorApp.ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH;
 import static org.example.TransactionProcessorApp.TRANSACTION_TYPE_STRING_LENGTH;
-import static org.example.TransactionProcessorApp.TransactionType.DEPOSIT;
+import static org.example.TransactionType.DEPOSIT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +47,12 @@ public class TransactionProcessorAppTest {
 
     @Test
     public void testExtractTransactionAmount() {
-        TransactionProcessorApp app = new TransactionProcessorApp();
+        CommandParser parser = new CommandParser(null, null) {
+            @Override
+            public void parse(String transaction) {
+                return;
+            }
+        };
         int amountNotationBeginningIndex =  TRANSACTION_TYPE_STRING_LENGTH +
                 ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH +
                 6 +
@@ -56,7 +60,7 @@ public class TransactionProcessorAppTest {
                 7;
 
 
-        Integer transactionAmount = app.extractTransactionAmount("2010064447770712345670000020000", amountNotationBeginningIndex);
+        Integer transactionAmount = parser.extractTransactionAmount("2010064447770712345670000020000", amountNotationBeginningIndex);
         assertTrue(transactionAmount == 20000);
     }
 
