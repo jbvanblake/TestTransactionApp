@@ -3,11 +3,9 @@ package org.example;
 // Main Class
 public class TransactionProcessorApp {
 
-    public void processTransactions(String[] transactions) {
-        AccountDao accountDao = new AccountDaoImpl();
+    public void processTransactions(String[] transactions, AccountDao accountDao) {
         CommandParserProvider commandParserProvider = new CommandParserProvider(accountDao);
 
-        log("Starting Transaction Processor:");
         log("Start Inputs:");
         for (String transaction : transactions) {
             CommandParser parser = commandParserProvider.getParserFromTransactionString(transaction);
@@ -15,7 +13,6 @@ public class TransactionProcessorApp {
             parser.parse(transaction);
 
             log(transaction);
-
         }
         log("End Inputs:");
         accountDao.printAccounts();

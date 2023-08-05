@@ -19,7 +19,11 @@ public class CommandParserProvider {
     public CommandParser getParserFromTransactionString(String transactionString) {
         TransactionType transactionType = extractTransactionType(transactionString);
 
-        return parsers.stream().filter(commandParser -> commandParser.type == transactionType).findFirst().get();}
+        return parsers.stream()
+                .filter(commandParser -> commandParser.type == transactionType)
+                .findFirst()
+                .get();
+    }
 
     public TransactionType extractTransactionType(String transaction) {
         String transactionTypePrefix = transaction.substring(0, 4);

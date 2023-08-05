@@ -77,6 +77,10 @@ public class AccountDaoImpl implements AccountDao {
         ;
     }
 
+    public Map<String, Account> getAccounts() {
+        return accounts;
+    }
+
     private static void log(String message) {
         System.out.println(message);
     }
