@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.TransactionProcessorApp.ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH;
+import static org.example.TransactionProcessorApp.TRANSACTION_TYPE_STRING_LENGTH;
 import static org.example.TransactionProcessorApp.TransactionType.DEPOSIT;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 // Test Class
 public class TransactionProcessorAppTest {
@@ -31,8 +33,31 @@ public class TransactionProcessorAppTest {
     @Test
     public void testExtractAccountNumber() {
         TransactionProcessorApp app = new TransactionProcessorApp();
-        String accountNumber = app.extractAccountNumber("10100712345670000200000");
+        String accountNumber = app.extractAccountNumber("10100712345670000200000", 4);
         assertEquals(accountNumber, "1234567");
+    }
+    @Test
+    public void testExtractAccountNumberForTransfer() {
+        TransactionProcessorApp app = new TransactionProcessorApp();
+        String sourceAccountNumber = app.extractAccountNumber("2010064447770712345670000020000", 4);
+        assertEquals( "444777", sourceAccountNumber);
+
+        String destinationAccountNumber = app.extractAccountNumber("2010064447770712345670000020000", sourceAccountNumber.length() + 6);
+        assertEquals( "1234567", destinationAccountNumber);
+    }
+
+    @Test
+    public void testExtractTransactionAmount() {
+        TransactionProcessorApp app = new TransactionProcessorApp();
+        int amountNotationBeginningIndex =  TRANSACTION_TYPE_STRING_LENGTH +
+                ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH +
+                6 +
+                ACCOUNT_NUMBER_LENGTH_DENOTATION_LENGTH +
+                7;
+
+
+        Integer transactionAmount = app.extractTransactionAmount("2010064447770712345670000020000", amountNotationBeginningIndex);
+        assertTrue(transactionAmount == 20000);
     }
 
 
