@@ -1,6 +1,8 @@
-package org.example;
+package org.example.command;
 
-import static org.example.TransactionType.WITHDRAW;
+import org.example.dao.AccountDao;
+
+import static org.example.domain.TransactionType.WITHDRAW;
 
 public class WithdrawCommandParser extends CommandParser {
 

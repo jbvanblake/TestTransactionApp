@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dao;
 
 public interface AccountDao {
     boolean deposit(String accountNumber, Integer transactionAmount, boolean b);

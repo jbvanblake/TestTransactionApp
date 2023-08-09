@@ -1,4 +1,7 @@
-package org.example;
+package org.example.command;
+
+import org.example.domain.TransactionType;
+import org.example.dao.AccountDao;
 
 public abstract class CommandParser {
     public static final int TRANSACTION_COMMAND_AMOUNT_LENGTH = 10;
@@ -16,7 +19,7 @@ public abstract class CommandParser {
     protected Integer consumeCommandTransactionAmount(Command command) {
         int transactionAmount = Integer.parseInt(command.getRemainingCommandString().substring(0, TRANSACTION_COMMAND_AMOUNT_LENGTH));
 
-        command.consume(TRANSACTION_COMMAND_AMOUNT_LENGTH);
+        command.consumeNumCommandChars(TRANSACTION_COMMAND_AMOUNT_LENGTH);
 
         return transactionAmount;
     }
@@ -26,10 +29,10 @@ public abstract class CommandParser {
         String accountNumberLengthString = command.getRemainingCommandString().substring(0, TRANSACTION_COMMAND_ACCOUNT_NUMBER_LENGTH_DENOTER);
         Integer accountNumberLength = Integer.parseInt(accountNumberLengthString);
 
-        command.consume(TRANSACTION_COMMAND_ACCOUNT_NUMBER_LENGTH_DENOTER);
+        command.consumeNumCommandChars(TRANSACTION_COMMAND_ACCOUNT_NUMBER_LENGTH_DENOTER);
 
         String accountNumber = command.getRemainingCommandString().substring(0, accountNumberLength);
-        command.consume(accountNumberLength);
+        command.consumeNumCommandChars(accountNumberLength);
 
         return accountNumber;
     }

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.dao;
+
+import org.example.domain.Account;
 
 import java.util.HashMap;
 import java.util.Map;

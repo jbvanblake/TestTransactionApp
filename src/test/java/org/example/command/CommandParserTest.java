@@ -1,5 +1,7 @@
-package org.example;
+package org.example.command;
 
+import org.example.command.Command;
+import org.example.command.CommandParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,10 +1,13 @@
-package org.example;
+package org.example.command;
+
+import org.example.domain.TransactionType;
+import org.example.dao.AccountDao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.example.TransactionType.valueOfPrefix;
+import static org.example.domain.TransactionType.valueOfPrefix;
 
 public class CommandParserProvider {
     List<CommandParser> parsers;
@@ -16,8 +19,9 @@ public class CommandParserProvider {
         parsers.add(new TransferCommandParser(accountDao));
     }
 
-    public CommandParser getParserFromTransactionString(String transactionString) {
-        TransactionType transactionType = extractTransactionType(transactionString);
+    public CommandParser getParserFromTransactionString(Command command) {
+        TransactionType transactionType = extractTransactionType(command.getRemainingCommandString());
+        command.consumeNumCommandChars(4);
 
         return parsers.stream()
                 .filter(commandParser -> commandParser.type == transactionType)

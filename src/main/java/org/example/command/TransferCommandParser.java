@@ -1,4 +1,7 @@
-package org.example;
+package org.example.command;
+
+import org.example.domain.TransactionType;
+import org.example.dao.AccountDao;
 
 public class TransferCommandParser extends CommandParser {
 

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.command;
 
 public class Command {
     private final String command;
@@ -17,7 +17,7 @@ public class Command {
         return remainingCommandString;
     }
 
-    public void consume(int i) {
+    public void consumeNumCommandChars(int i) {
         this.remainingCommandString = this.remainingCommandString.substring(i);
     }
 }

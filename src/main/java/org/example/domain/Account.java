@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain;
 
 public class Account {
     private Integer amount;

@@ -1,8 +1,10 @@
-package org.example;
+package org.example.command;
 
+import org.example.command.CommandParserProvider;
+import org.example.domain.TransactionType;
 import org.junit.Test;
 
-import static org.example.TransactionType.DEPOSIT;
+import static org.example.domain.TransactionType.DEPOSIT;
 import static org.junit.Assert.assertEquals;
 
 public class CommandParserProviderTest {

@@ -1,6 +1,8 @@
-package org.example;
+package org.example.command;
 
-import static org.example.TransactionType.DEPOSIT;
+import org.example.dao.AccountDao;
+
+import static org.example.domain.TransactionType.DEPOSIT;
 
 public class DepositCommandParser extends CommandParser {
 
