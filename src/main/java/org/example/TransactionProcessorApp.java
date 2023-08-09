@@ -8,9 +8,11 @@ public class TransactionProcessorApp {
 
         log("Start Inputs:");
         for (String transaction : transactions) {
-            CommandParser parser = commandParserProvider.getParserFromTransactionString(transaction);
+            Command command = new Command(transaction);
+            CommandParser parser = commandParserProvider.getParserFromTransactionString(command.getRemainingCommandString());
+            command.consume(4);
 
-            parser.parse(transaction);
+            parser.parse(command);
 
             log(transaction);
         }
